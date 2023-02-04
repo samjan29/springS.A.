@@ -1,23 +1,25 @@
 package oopPrac;
 
-public abstract class PublicTransportation {
+public abstract class PublicTransportation implements Car {
     private final int number;     // 번호 :: 고유값
+    private static int count = 1;
     private int gas;    // 주유량
     private int speed;  // 속도
     private int passenger;
     private int maxPassenger;   // 최대 승객 수
-    private int baseFare;
+    private int baseFare;   // 기본 요금
+
+    private boolean power;
 
     private String status;  // 상태
 
 
-    public PublicTransportation(int number) {     // 기본값 세팅하는 기본 생성자
-        this.number = number;
+    public PublicTransportation() {     // 기본값 세팅하는 기본 생성자
+        number = count++;
         gas = 100;
         speed = 0;
     }
 
-    abstract void pickUp(int passenger);
 
     public int getNumber() {
         return number;
@@ -71,9 +73,17 @@ public abstract class PublicTransportation {
         this.gas = gas;
     };
 
-    abstract void changeGas(int gas);
+    public boolean isPower() {
+        return power;
+    }
 
-    abstract void changeSpeed(int speed);
+    public void setPower(boolean power) {
+        this.power = power;
+    }
+
+    abstract void pickUp(int passenger);
+
+    abstract void isDrive();
 
     abstract void changeStatus(String status);
 }
